@@ -42,27 +42,27 @@ public class Configuration {
         if (properties.containsKey(key)) {
             value = (String)properties.get(key);
         } else {
-            System.err.println("Что-то пошло не так. В начале программы свойства задаются" +
-                    " значениями по умолчанию, если не заданы опциями с CLI");
+            System.err.println("Something is wrong");
+            System.exit(1);
         }
         return value;
     }
 
     private void initOptions() {
-        Option opt = new Option("n", THREADS, true, "количество одновременно качающих потоков (1,2,3,4....)");
-        opt.setRequired(false);
+        Option opt = new Option("n", THREADS, true, "number of simultaneous threads");
+        opt.setRequired(true);
         options.addOption(opt);
 
-        opt = new Option("l", BANDWIDTH, true, "общее ограничение на скорость скачивания, для всех потоков," +
-                " размерность - байт/секунда, можно использовать суффиксы k,m (k=1024, m=1024*1024)");
-        opt.setRequired(false);
+        opt = new Option("l", BANDWIDTH, true, "maximum bandwidth for all threads. you can use suffixes" +
+                " k,m (k=1024, m=1024*1024)");
+        opt.setRequired(true);
         options.addOption(opt);
 
-        opt = new Option("f", LINKS, true, "путь к файлу со списком ссылок");
-        opt.setRequired(false);
+        opt = new Option("f", LINKS, true, "file with links");
+        opt.setRequired(true);
         options.addOption(opt);
 
-        opt = new Option("o", DOWNLOAD_FOLDER, true, "имя папки, куда складывать скачанные файлы");
+        opt = new Option("o", DOWNLOAD_FOLDER, true, "folder name where to download");
         opt.setRequired(false);
         options.addOption(opt);
     }
